@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="css\index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Login</h1>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required><br><br>
+            <button id="backButton">Back</button>
+            <button type="submit">Login</button>
+        </form>
+        <p id="errorMessage" class="error"></p>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").onsubmit = function (event) {
+            event.preventDefault();
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            if (username === "yash" && password === "123") {
+                sessionStorage.setItem("isAdmin", "true");
+                window.location.href = "home.html";
+            } else {
+                document.getElementById("errorMessage").innerText = "Incorrect username or password.";
+            }
+        };
+        document.getElementById("backButton").onclick = function () {
+            window.location.href = "home.html";
+        };
+    </script>
+</body>
+</html>
+

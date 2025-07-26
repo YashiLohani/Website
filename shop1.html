@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop 1</title>
+    <link rel="stylesheet" href="css/machine.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SHOP 1</h1>
+        <p id="machineDetails" style="margin-left: 20px;font-family: 'Segoe UI', 
+        Tahoma, Geneva, Verdana, sans-serif; font-size: 20px;">Details about the shop...</p>
+        <textarea id="editArea" style="display:none;"></textarea>
+        <button id="backButton">Back</button>
+        <button id="editButton">Edit</button>
+        <button id="saveButton" style="display:none;">Save</button>
+        <p id="notAdminMessage" class="error" style="display:none;margin-left: 20px;">You are not the admin.</p>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var isAdmin = sessionStorage.getItem("isAdmin");
+
+            if (isAdmin === "true") {
+                document.getElementById("editButton").onclick = function () {
+                    var details = document.getElementById("machineDetails").innerText;
+                    document.getElementById("editArea").value = details;
+                    document.getElementById("machineDetails").style.display = "none";
+                    document.getElementById("editButton").style.display = "none";
+                    document.getElementById("editArea").style.display = "block";
+                    document.getElementById("saveButton").style.display = "inline";
+                };
+
+                document.getElementById("saveButton").onclick = function () {
+                    var newDetails = document.getElementById("editArea").value;
+                    document.getElementById("machineDetails").innerText = newDetails;
+                    document.getElementById("machineDetails").style.display = "block";
+                    document.getElementById("editButton").style.display = "inline";
+                    document.getElementById("editArea").style.display = "none";
+                    document.getElementById("saveButton").style.display = "none";
+                };
+            } else {
+                document.getElementById("editButton").onclick = function () {
+                    document.getElementById("notAdminMessage").style.display = "block";
+                };
+            }
+        };
+        document.getElementById("backButton").onclick = function () {
+            window.location.href = "home.html";
+        };
+    </script>
+</body>
+</html>
